@@ -1,0 +1,10 @@
+SQLAlchemy
+psycopg2-binary
+asyncpg
+python-decouple
+fastapi
+sqlalchemy==2.0.3
+uvicorn
+tenacity
+redis
+rq

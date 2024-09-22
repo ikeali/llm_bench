@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "llm_benchmark.fullname" . }}-test-connection"
+  labels:
+    helm.sh/chart: llm_benchmark-0.1.0
+    app.kubernetes.io/name: llm_benchmark
+    app.kubernetes.io/instance: llm-benchmark
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+    {{- include "llm_benchmark.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "llm_benchmark.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
