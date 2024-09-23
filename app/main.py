@@ -48,6 +48,20 @@ def create_llm(llm: LLMCreate, db: Session = Depends(get_db)):
     queue.enqueue(create_llm_in_db, llm, db)
     return {"message": "LLM creation in progress"}
 
+@app.delete("/llms/{llm_id}")
+def delete_llm(llm_id: int, db: Session = Depends(get_db)):
+    try:
+        llm = db.query(LLM).get(llm_id)
+        if not llm:
+            raise HTTPException(status_code=404, detail="LLM not found")
+        db.delete(llm)
+        db.commit()
+        return {"message": "LLM deleted successfully"}
+    except Exception as e:
+        logger.error(f"Error deleting LLM: {e}")
+        raise HTTPException(status_code=500, detail="Server error")
+
+
 
 @app.get("/")
 def read_root():

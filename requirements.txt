@@ -8,3 +8,4 @@ uvicorn
 tenacity
 redis
 rq
+celery

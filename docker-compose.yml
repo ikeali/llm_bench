@@ -1,42 +1,3 @@
-# version: '3.8'
-
-# services:
-#   db:
-#     image: postgres:latest
-#     environment:
-#       POSTGRES_USER: postgres
-#       POSTGRES_PASSWORD: ikeali123
-#       POSTGRES_DB: llm
-#     ports:
-#       - "5432:5432"
-#     volumes:
-#       - pgdata:/var/lib/postgresql/data
-
-# volumes:
-#   pgdata:
-
-
-
-# services:
-#   fastapi:
-#     build: ./fastapi
-#     ports:
-#       - "8000:8000"  # Exposes FastAPI on port 8000
-#     environment:
-#       DATABASE_URL: postgresql://postgres:ikeali123@db:5432/llm  # Connects to the DB on port 5432
-#     depends_on:
-#       - db
-
-#   db:
-#     image: postgres:latest
-#     environment:
-#       POSTGRES_USER: postgres
-#       POSTGRES_PASSWORD: ikeali123
-#       POSTGRES_DB: llm
-#     ports:
-#       - "5432:5432"  # Exposes PostgreSQL on port 5432
-
-
 version: '3.8'
 
 services:
@@ -44,8 +5,12 @@ services:
     build: .
     ports:
       - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:ikeali123@db:5432/llm  
+      REDIS_URL: redis://redis:6379 
     depends_on:
       - db
+      - redis  
 
   db:
     image: postgres:latest
@@ -55,3 +20,13 @@ services:
       POSTGRES_DB: llm
     ports:
       - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: "redis:alpine"  # Official Redis image
+    ports:
+      - "6379:6379"  
+
+volumes:
+  pgdata:
