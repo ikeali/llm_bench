@@ -133,14 +133,19 @@ json
   "name": "LLM Name",
   "description": "Description of the LLM"
 }
+
 Generate API Key
+
 Endpoint: POST /api-keys/
+
 Request Body:
+
 json
 
 {
   "user_id": 1
 }
+
 Fetch Rankings
 
 Endpoint: GET /rankings/
@@ -162,43 +167,13 @@ Start Redis: Ensure Redis is running locally or in Docker. You can use Docker Co
 Executing Background Tasks: When tasks such as generating simulations are triggered, they will be queued in Redis and processed by Celery workers in the background.
 
 7. Running the Application
+
 To run the FastAPI application, use the following command:
 
 uvicorn main:app --reload
 
 •	The app will be accessible at http://127.0.0.1:8000.
 
-API Endpoints
-
-Create LLM
-
-•	Endpoint: POST /llms/
-
-•	Request Body:
-json
-{
-  "name": "LLM Name",
-  "description": "Description of the LLM"
-}
-Generate API Key
-•	Endpoint: POST /api-keys/
-•	Request Body:
-json
-{
-  "user_id": 1
-}
-
-
-
-Response:
-json
-{
-  "api_key": "your_generated_api_key"
-}
-Fetch Rankings
-•	Endpoint: GET /rankings/
-•	Query Parameters:
-o	metric_identifier: The name or ID of the metric for which to fetch rankings.
 
 ## Frontend
 Navigate to the Frontend Directory:
