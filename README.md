@@ -6,55 +6,7 @@ This is a FastAPI application designed for managing Large Language Models (LLMs)
 
 In addition, the project uses a frontend (React, Vue, or similar), Redis for caching and task queuing, and Celery for handling background tasks like data simulation and ranking computation.
 
-## Features
-Create new LLM entries.
-Generate random simulation data for LLMs.
-Fetch rankings based on specified metrics.
-Frontend dashboard for visualizing LLM data and rankings.
-Background tasks using Celery for handling intensive computations asynchronously.
-API key generation for secure access.
-
-## Prerequisites
-Backend: Python 3.8 or higher
-Frontend: Node.js 14 or higher
-Database: PostgreSQL
-Message Queue: Redis (for task queuing with Celery)
-Required Python packages (listed in requirements.txt)
-Docker and Docker Compose (for containerized development)
-
-## Installation
-
-# Backend
-1. **Clone the Repository:**
-   cd your-repo-name
-2.	Set Up a Virtual Environment:
-python -m venv venv
-source venv/bin/activate  # On Mac, On  Windows use `venv\Scripts\activate`
-3.	Install Required Packages:
-pip install -r requirements.txt
-4.	Set Up Database:
-o	Create a PostgreSQL database.
-o	Configure the database connection in your environment or in a .env file.
-Seed Initial Data (Optional):
-You can optionally seed your database with initial data by running the seeding script:
-python seed_data.py 
-
-5. Set Up Redis:
-Install and start Redis locally or configure the Redis server URL in your .env file.
-Set Up Celery Worker: Celery will be responsible for background tasks such as data simulation or ranking computations. To start the worker:
-celery -A app.celery_app worker --loglevel=info
-
-
-
-To expand and make your README more comprehensive with the recent updates such as the Frontend Implementation, Redis and Celery Integration, and more, here’s an updated version of your README.md file:
-
-LLM Benchmark FastAPI Application
-Overview
-This is a FastAPI application designed for managing Large Language Models (LLMs) and their performance metrics. The application provides an API to create LLMs, generate simulation data, and retrieve rankings based on various metrics.
-
-In addition, the project uses a frontend (React, Vue, or similar), Redis for caching and task queuing, and Celery for handling background tasks like data simulation and ranking computation.
-
-Features
+# Features
 Create new LLM entries.
 Generate random simulation data for LLMs.
 Fetch rankings based on specified metrics.
@@ -72,20 +24,16 @@ Installation
 Backend
 Clone the Repository:
 
-bash
-Copy code
+
 git clone https://github.com/your-repo-name.git
 cd your-repo-name
 Set Up a Virtual Environment:
 
-bash
-Copy code
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 Install Required Packages:
 
-bash
-Copy code
+
 pip install -r requirements.txt
 Set Up Database:
 
@@ -96,30 +44,30 @@ Set Up Redis:
 Install and start Redis locally or configure the Redis server URL in your .env file.
 Set Up Celery Worker: Celery will be responsible for background tasks such as data simulation or ranking computations. To start the worker:
 
-bash
-Copy code
+
+
 celery -A app.celery_app worker --loglevel=info
 Run the Application:
 
-bash
-Copy code
+
+
 uvicorn main:app --reload
 The app will be accessible at http://127.0.0.1:8000.
 Frontend
 Navigate to the Frontend Directory:
 
-bash
-Copy code
+
+
 cd frontend
 Install Frontend Dependencies:
 
-bash
-Copy code
+
+
 npm install
 Run the Frontend:
 
-bash
-Copy code
+
+
 npm start
 The frontend will be accessible at http://localhost:3000.
 Docker Setup
@@ -127,8 +75,8 @@ To simplify the deployment and running of both the backend and frontend, you can
 
 Build and Run Docker Containers: Ensure your docker-compose.yml is configured properly. To start the services:
 
-bash
-Copy code
+
+
 docker-compose up --build
 Access the Application:
 
@@ -137,8 +85,8 @@ Frontend: http://localhost:3000
 Configuration
 Ensure you have the following environment variables configured in your .env file for both local development and production:
 
-bash
-Copy code
+
+
 DATABASE_URL=postgresql://<user>:<password>@<host>:<port>/<database>
 REDIS_URL=redis://<host>:<port>
 CELERY_BROKER_URL=redis://<host>:<port>/0
@@ -148,7 +96,7 @@ Create LLM
 Endpoint: POST /llms/
 Request Body:
 json
-Copy code
+
 {
   "name": "LLM Name",
   "description": "Description of the LLM"
@@ -157,7 +105,7 @@ Generate API Key
 Endpoint: POST /api-keys/
 Request Body:
 json
-Copy code
+
 {
   "user_id": 1
 }
@@ -222,17 +170,11 @@ Navigate to the Frontend Directory:
 cd frontend
 Install Frontend Dependencies:
 
-
 npm install
 Run the Frontend:
 
-
 npm start
 The frontend will be accessible at http://localhost:3000.
-
-
-
-
 
 **CI/CD DEPLOYMWENT**
 
@@ -292,6 +234,3 @@ helm install llm-benchmark ./llm_benchmark --set replicaCount=5 --set service.po
 Testing
 You can run the connection test by creating a test pod:
 kubectl run llm-benchmark-test --image=busybox --command -- wget llm-benchmark:80
-
-
-
