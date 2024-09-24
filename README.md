@@ -175,19 +175,6 @@ uvicorn main:app --reload
 •	The app will be accessible at http://127.0.0.1:8000.
 
 
-## Frontend
-Navigate to the Frontend Directory:
-
-cd frontend
-Install Frontend Dependencies:
-
-npm install
-Run the Frontend:
-
-npm start
-
-The frontend will be accessible at http://localhost:3000.
-
 **CI/CD DEPLOYMWENT**
 
 This project can be deployed using Kubernetes for production environments. The Helm chart simplifies deploying the application into a Kubernetes cluster.
