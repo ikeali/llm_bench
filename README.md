@@ -20,58 +20,77 @@ Database: PostgreSQL
 Message Queue: Redis (for task queuing with Celery)
 Required Python packages (listed in requirements.txt)
 Docker and Docker Compose (for containerized development)
+
 Installation
+
 Backend
+
 Clone the Repository:
 
 
 git clone https://github.com/your-repo-name.git
+
 cd your-repo-name
 
 Set Up a Virtual Environment:
 
 python -m venv venv
+
 source venv/bin/activate  # On Windows: venv\Scripts\activate
+
 Install Required Packages:
 
 
 pip install -r requirements.txt
+
 Set Up Database:
 
 Create a PostgreSQL database.
+
 Configure the database connection in your .env file or environment variables.
+
 Set Up Redis:
 
 Install and start Redis locally or configure the Redis server URL in your .env file.
+
 Set Up Celery Worker: Celery will be responsible for background tasks such as data simulation or ranking computations. To start the worker:
 
 
 
 celery -A app.celery_app worker --loglevel=info
+
 Run the Application:
 
 
 
 uvicorn main:app --reload
+
 The app will be accessible at http://127.0.0.1:8000.
+
 Frontend
+
 Navigate to the Frontend Directory:
 
 
 
 cd frontend
+
 Install Frontend Dependencies:
 
 
 
 npm install
+
 Run the Frontend:
 
 
 
 npm start
+
 The frontend will be accessible at http://localhost:3000.
+
 Docker Setup
+
 To simplify the deployment and running of both the backend and frontend, you can use Docker:
 
 Build and Run Docker Containers: Ensure your docker-compose.yml is configured properly. To start the services:
@@ -79,23 +98,35 @@ Build and Run Docker Containers: Ensure your docker-compose.yml is configured pr
 
 
 docker-compose up --build
+
 Access the Application:
 
 Backend: http://localhost:8000
+
 Frontend: http://localhost:3000
+
 Configuration
+
 Ensure you have the following environment variables configured in your .env file for both local development and production:
 
 
 
 DATABASE_URL=postgresql://<user>:<password>@<host>:<port>/<database>
+
 REDIS_URL=redis://<host>:<port>
+
 CELERY_BROKER_URL=redis://<host>:<port>/0
+
 CELERY_RESULT_BACKEND=redis://<host>:<port>/0
+
 API Endpoints
+
 Create LLM
+
 Endpoint: POST /llms/
+
 Request Body:
+
 json
 
 {
@@ -111,34 +142,38 @@ json
   "user_id": 1
 }
 Fetch Rankings
-Endpoint: GET /rankings/
-Query Parameters:
-metric_identifier: The name or ID of the metric for which to fetch rankings.
-Frontend Dashboard
-The application provides a frontend dashboard for visualizing LLM data and performance metrics.
 
-Features:
-Dashboard: Displays various metrics and rankings for the LLMs.
-Data Visualization: Graphical representation of LLM metrics using charts (e.g., line charts, bar charts, etc.).
-Responsive UI: The dashboard is responsive and works across devices.
+Endpoint: GET /rankings/
+
+Query Parameters:
+
+metric_identifier: The name or ID of the metric for which to fetch rankings.
 
 Background Task Processing (Celery + Redis)
+
 To handle intensive tasks such as generating large amounts of simulation data or computing rankings, the project uses Celery with a Redis broker.
 
 Start the Celery Worker:
 
 celery -A app.celery_app worker --loglevel=info
+
 Start Redis: Ensure Redis is running locally or in Docker. You can use Docker Compose to start Redis alongside the application.
 
 Executing Background Tasks: When tasks such as generating simulations are triggered, they will be queued in Redis and processed by Celery workers in the background.
 
 7. Running the Application
 To run the FastAPI application, use the following command:
+
 uvicorn main:app --reload
+
 •	The app will be accessible at http://127.0.0.1:8000.
+
 API Endpoints
+
 Create LLM
+
 •	Endpoint: POST /llms/
+
 •	Request Body:
 json
 {
@@ -175,6 +210,7 @@ npm install
 Run the Frontend:
 
 npm start
+
 The frontend will be accessible at http://localhost:3000.
 
 **CI/CD DEPLOYMWENT**
@@ -205,7 +241,8 @@ Before you begin, ensure you have the following installed:
 cd llm_benchmark
 1.	Install the Helm chart:
 helm install llm-benchmark ./llm_benchmark
-2.	Verify the installation:
+
+3.	Verify the installation:
 kubectl get all -l app.kubernetes.io/instance=llm-benchmark
 Usage
 Once the application is deployed, you can access it via the exposed services. Use the following command to get the service details:
